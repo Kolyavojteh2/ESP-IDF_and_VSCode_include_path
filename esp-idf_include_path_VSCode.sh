@@ -2,20 +2,6 @@
 # WARNING: this script REWRITES ".vscode/settings.json" FILE.
 # All previos settings will be REMOVED in the file ".vscode/settings.json"
 
-# Before start
-
-#
-# The followind commented text need to add at the start of file for successfull autocomplete integration
-#
-# // Need for freertos/FreeRTOS.h include header with XTENSA arch or ESP32 MCU
-# include "../build/config/sdkconfig.h"
-# if (CONFIG_IDF_TARGET_ARCH_XTENSA == 1)
-# define __XTENSA__ 1
-# else
-# define __XTENSA__ 0
-# endif // __XTENSA__
-#
-
 includes=""
 
 function check_file_exists() {
@@ -196,6 +182,17 @@ done
 
 # Remove last commas
 json=${json%?}
+
+json="$json
+  ],
+  \"C_Cpp.default.defines\": [
+    \"__XTENSA__"
+
+if [[ $arch == "xtensa" ]]; then
+  json="$json 1\""
+else
+  json="$json 0\""
+fi
 
 json="$json
   ]

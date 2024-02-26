@@ -14,15 +14,4 @@ At the moment of running the script, you need to assemble at least an empty proj
 
 This script has only been tested for the ESP32 microcontroller, but should work for other microcontrollers as well.
 
-For ESP32, you also need to add the following lines before including the header files:
-```
-// Need for freertos/FreeRTOS.h include header with XTENSA arch or ESP32 MCU
-#include "../build/config/sdkconfig.h"
-#if (CONFIG_IDF_TARGET_ARCH_XTENSA == 1)
-#define __XTENSA__ 1
-#else
-#define __XTENSA__ 0
-#endif // __XTENSA__
-```
-
 If someone has a desire and already certain decisions to improve this script, you can always make changes to the script.
